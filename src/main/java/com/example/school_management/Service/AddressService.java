@@ -11,7 +11,6 @@ import com.example.school_management.Model.Teacher;
 import com.example.school_management.Repository.AddressRepository;
 import com.example.school_management.Repository.TeacherRepository;
 
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -44,13 +43,15 @@ public class AddressService {
         addressRepository.save(address); 
     }
 
-    @Transactional
     public void deleteAddress(Integer teacherId){
         Teacher teacher = teacherRepository.findTeacherById(teacherId)
             .orElseThrow(() -> new ApiException("TEACHER NOT FOUND")); 
 
-        addressRepository.delete(teacher.getAddress());
-        teacher.setAddress(null);
+        Address address = addressRepository.findAddressById(teacherId)
+            .orElseThrow(() -> new ApiException("TEACHER NOT FOUND")); 
+            
+        teacher.setAddress(null); 
+        addressRepository.delete(address);
         teacherRepository.save(teacher);
     }
 
