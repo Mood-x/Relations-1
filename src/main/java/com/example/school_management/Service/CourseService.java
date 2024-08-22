@@ -51,4 +51,11 @@ public class CourseService {
         course.setTeacher(teacher);
         courseRepository.save(course); 
     }
+
+    public String returnTeacherClass(Integer courseId){
+        Course course = courseRepository.findCourseById(courseId)
+            .orElseThrow(() -> new ApiException("COURSE NOT FOUND")); 
+        
+        return course.getTeacher().getName(); 
+    }
 }

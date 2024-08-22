@@ -55,4 +55,9 @@ public class CourseController {
         courseService.assignToTeacher(teacherId, courseId);
         return ResponseEntity.ok(new ApiResponse("Course assign to " + teacherId)); 
     }
+
+    @GetMapping("/course/{courseId}")
+    public ResponseEntity returnTeacherClass(@PathVariable Integer courseId){
+        return ResponseEntity.ok(new ApiResponse("Teacher name: " + courseService.returnTeacherClass(courseId))); 
+    }
 }
