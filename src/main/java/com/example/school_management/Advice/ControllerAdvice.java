@@ -88,4 +88,9 @@ public class ControllerAdvice {
     public ResponseEntity InvalidDataAccessApiUsageException(InvalidDataAccessApiUsageException e){
         return ResponseEntity.status(400).body(e.getMessage()); 
     }
+
+    @ExceptionHandler(value = ClassCastException.class)
+    public ResponseEntity ClassCastException(ClassCastException e){
+        return ResponseEntity.status(400).body(e.getMessage()); 
+    }
 }

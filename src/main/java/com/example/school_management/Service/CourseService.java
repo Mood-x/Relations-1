@@ -1,11 +1,13 @@
 package com.example.school_management.Service;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
 import com.example.school_management.API.ApiException;
 import com.example.school_management.Model.Course;
+import com.example.school_management.Model.Student;
 import com.example.school_management.Model.Teacher;
 import com.example.school_management.Repository.CourseRepository;
 import com.example.school_management.Repository.TeacherRepository;
@@ -57,5 +59,12 @@ public class CourseService {
             .orElseThrow(() -> new ApiException("COURSE NOT FOUND")); 
         
         return course.getTeacher().getName(); 
+    }
+
+
+    public Set<Student> getStudentsByCourseId(Integer courseId){
+        Course course = courseRepository.findCourseById(courseId)
+            .orElseThrow(() -> new ApiException("COURSE NOT FOUND")); 
+        return course.getStudents(); 
     }
 }

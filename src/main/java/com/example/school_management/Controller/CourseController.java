@@ -60,4 +60,9 @@ public class CourseController {
     public ResponseEntity returnTeacherClass(@PathVariable Integer courseId){
         return ResponseEntity.ok(new ApiResponse("Teacher name: " + courseService.returnTeacherClass(courseId))); 
     }
+
+    @GetMapping("/course/{courseId}")
+    public ResponseEntity getStudentsByCourseId(@PathVariable Integer courseId){
+        return ResponseEntity.ok(courseService.getStudentsByCourseId(courseId)); 
+    }
 }
